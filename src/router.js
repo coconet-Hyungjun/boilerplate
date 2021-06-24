@@ -13,6 +13,7 @@ const checkAuthCompo = () => {
 };
 
 const AuthRouter = ({ path, children, ...props }) => {
+  console.log('auth');
   const render = () => {
     checkAuthCompo();
     return checkAuth ? children : <Redirect to="/" />;
@@ -22,34 +23,30 @@ const AuthRouter = ({ path, children, ...props }) => {
 };
 
 const PubilcRouter = ({ path, children, ...props }) => {
+  console.log('public');
   const render = () => children;
 
   return <Route path={path} render={render} {...props} />;
 };
 
 export default function _Router() {
-  if (true) {
-  } else {
-    return <div>fail</div>;
-  }
-
   return (
     <BrowserRouter>
       <Switch>
         <AuthRouter path={['/private']}>
-          <Route path="/private" component={Private} />
+          <Switch>
+            <Route path="/private" component={Private} />
+          </Switch>
         </AuthRouter>
-        <PubilcRouter path={['/', '/test']}>
+        <PubilcRouter exact path={['/', '/test']}>
           <BaseLayout>
-            <Route exact path="/" component={Home} />
-            <Route path="/test" component={Test} />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/test" component={Test} />
+            </Switch>
           </BaseLayout>
         </PubilcRouter>
-        <Route path="*">
-          <Switch>
-            <Route component={NotFound} />
-          </Switch>
-        </Route>
+        <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
   );

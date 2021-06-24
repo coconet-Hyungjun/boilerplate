@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import BaseLayout from './components/layout/BaseLayout';
+import { BaseLayout, CustomLayout } from './components/layout';
 import { Home, Test, Private, NotFound } from './containers/pages';
 
 let checkAuth = false;
@@ -13,7 +14,6 @@ const checkAuthCompo = () => {
 };
 
 const AuthRouter = ({ path, children, ...props }) => {
-  console.log('auth');
   const render = () => {
     checkAuthCompo();
     return checkAuth ? children : <Redirect to="/" />;
@@ -23,7 +23,6 @@ const AuthRouter = ({ path, children, ...props }) => {
 };
 
 const PubilcRouter = ({ path, children, ...props }) => {
-  console.log('public');
   const render = () => children;
 
   return <Route path={path} render={render} {...props} />;
@@ -34,9 +33,11 @@ export default function _Router() {
     <BrowserRouter>
       <Switch>
         <AuthRouter path={['/private']}>
-          <Switch>
-            <Route path="/private" component={Private} />
-          </Switch>
+          <CustomLayout>
+            <Switch>
+              <Route path="/private" component={Private} />
+            </Switch>
+          </CustomLayout>
         </AuthRouter>
         <PubilcRouter exact path={['/', '/test']}>
           <BaseLayout>

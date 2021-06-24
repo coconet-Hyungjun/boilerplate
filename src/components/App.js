@@ -3,10 +3,13 @@ import { createGlobalStyle } from 'styled-components';
 import { reset } from 'styled-reset';
 import './App.css';
 import Router from '../router';
+import dotenv from 'dotenv';
+import { useContextProvider as ContextProvider } from '../hooks/useContextProvider';
 
+dotenv.config();
 function App() {
   return (
-    <>
+    <ContextProvider>
       <Styled.GlobalStyles />
       <Helmet>
         <title>title</title>
@@ -14,7 +17,7 @@ function App() {
       <div>
         <Router />
       </div>
-    </>
+    </ContextProvider>
   );
 }
 

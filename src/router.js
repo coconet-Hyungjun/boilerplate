@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { BaseLayout, CustomLayout } from './components/layout';
 import { Home, Test, Private, NotFound } from './containers/pages';

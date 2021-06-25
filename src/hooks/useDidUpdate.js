@@ -9,5 +9,5 @@ export const useDidUpdate = (cb = () => {}, deeps = []) => {
     } else {
       ref.current = true;
     }
-  }, deeps);
+  }, [cb, ...deeps]);
 };

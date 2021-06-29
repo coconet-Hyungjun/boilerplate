@@ -4,10 +4,10 @@
 
 - [x] styled-components
 - [x] axios
-- [ ] redux
-- [ ] redux-toolkit
+- [x] redux
+- [x] redux-toolkit
 - [ ] redux-saga
-- [ ] storybook
+- [x] storybook
 - [ ] typescript
 
 ## How to start a dev server
